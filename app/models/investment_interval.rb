@@ -1,0 +1,2 @@
+class InvestmentInterval < ApplicationRecord
+end
