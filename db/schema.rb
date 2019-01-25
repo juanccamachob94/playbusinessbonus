@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_081131) do
+ActiveRecord::Schema.define(version: 2019_01_25_085157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2019_01_25_081131) do
   end
 
   create_table "unit_bonus", force: :cascade do |t|
-    t.string "stdv_float"
     t.bigint "investment_interval_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "stdv"
     t.index ["investment_interval_id"], name: "index_unit_bonus_on_investment_interval_id"
   end
 
