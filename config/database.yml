@@ -23,8 +23,11 @@ default: &default
 
 development:
   <<: *default
-  database: playbusiness_development
-
+  database: d8pd17h4ggmncb
+  username: stvidnspgjhxjm
+  password: 33136a60c09f3e796279e927b0358c369773b0050eb9e4569525178ee89dd7e8
+  host: ec2-54-235-77-0.compute-1.amazonaws.com
+  port: 5432
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
