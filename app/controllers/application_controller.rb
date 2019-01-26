@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
     user_id = params[:user_id]
 
     quantity = Investment.valid_investments(user_id).count
+    if quantity == 0
+      return render json: {data:[]}
+    end
     average = Investment.valid_investments(user_id).amount_difference_summary / quantity
     standard_desviation = Math.sqrt(Investment.valid_investments(user_id).amount_pow_difference_summary(average)/quantity)
     cv_interval = CvInterval.get_intervals(standard_desviation/average).first
@@ -14,7 +17,7 @@ class ApplicationController < ActionController::Base
     end
 
     bonus = Bonu.where(cv_investment_interval:CvInvestmentInterval.find_by(cv_interval:cv_interval,investment_interval:investment_interval))
-    render json: {data:{resultado:build_result(standard_desviation,bonus),quantity:quantity,average:average,investment_interval:investment_interval,cv_interval:cv_interval,bonus:bonus}}
+    render json: {data:build_result(standard_desviation,bonus)}
   end
 
   def build_result standard_desviation,bonus
@@ -23,7 +26,7 @@ class ApplicationController < ActionController::Base
       result[i] = {lower_limit: value.std * standard_desviation,bonus:"#{value.percent}%"}
     end
     (1..(result.length - 1)).each do |i|
-      result[i - 1][:upper_limit] ="$#{ result[i][:lower_limit] - 0.01}"
+      result[i - 1][:upper_limit] ="$#{result[i][:lower_limit] - 0.01}"
       result[i][:lower_limit] = "$#{result[i][:lower_limit]}"
     end
     result[0][:lower_limit] = "$#{result[0][:lower_limit]}"
