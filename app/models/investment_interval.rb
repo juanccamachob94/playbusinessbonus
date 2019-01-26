@@ -1,3 +1,3 @@
 class InvestmentInterval < ApplicationRecord
-  scope :get_interval, -> average, group {where("? between min and max",average).where(group:group).first}
+  scope :get_intervals, -> average, group {where("(? between min and max) or (min is null and ? < max) or (min < ? and max is null)",average,average,average).where(group:group)}
 end
