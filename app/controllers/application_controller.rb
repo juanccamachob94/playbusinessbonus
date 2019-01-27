@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  def calculate_user
+  def bonus_calculation
     user_id = params[:user_id]
 
     quantity = Investment.valid_investments(user_id).count
@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
 
     bonus = Bonu.where(cv_investment_interval:CvInvestmentInterval.find_by(cv_interval:cv_interval,investment_interval:investment_interval)).order("std")
     render json: {data:build_result(standard_desviation,bonus)}
+  end
+
+  def bonus_calculation_alternative
+    render json: {data:User.find_by_sql(['SELECT * FROM bonus_calculation(?)',params[:user_id]])}
   end
 
   def build_result standard_desviation,bonus
