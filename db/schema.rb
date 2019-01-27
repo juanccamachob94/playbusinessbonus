@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_085157) do
+ActiveRecord::Schema.define(version: 2019_01_26_233621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_01_25_085157) do
     t.float "max"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "group"
+    t.integer "collection"
   end
 
   create_table "investments", force: :cascade do |t|
@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 2019_01_25_085157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_investments_on_user_id"
+  end
+
+  create_table "standard_desviation", id: false, force: :cascade do |t|
+    t.float "sqrt"
   end
 
   create_table "unit_bonus", force: :cascade do |t|

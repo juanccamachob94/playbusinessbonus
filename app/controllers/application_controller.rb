@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       cv_interval = CvInterval.get_intervals(0.31).first
     end
 
-    bonus = Bonu.where(cv_investment_interval:CvInvestmentInterval.find_by(cv_interval:cv_interval,investment_interval:investment_interval))
+    bonus = Bonu.where(cv_investment_interval:CvInvestmentInterval.find_by(cv_interval:cv_interval,investment_interval:investment_interval)).order("std")
     render json: {data:build_result(standard_desviation,bonus)}
   end
 
