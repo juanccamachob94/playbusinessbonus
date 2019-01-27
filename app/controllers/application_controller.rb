@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
 
-
-  def bonus_calculation user
+  def bonus_calculation user_id
     # Number of investments of user with id = user_id
-    number_valid_of_investments = user.investments.valid_user_investments.count
+    number_valid_of_investments = Investment.valid_investments(user_id).count
     # In case of user doesn't have investments
     if number_valid_of_investments == 0
       return render json: {data:[]}
     end
     # average calculated with the sumatory of (amount-wallet_amount) and the number valid of investments
-    average = user.investments.valid_user_investments.amount_difference_summary / number_valid_of_investments
+    average = Investment.valid_investments(user_id).amount_difference_summary / number_valid_of_investments
     # standard_desviation sqrt(sum[(xi - average)^2]/number_valid_of_investments) xi = each value (amount - wallet_amount)
-    standard_desviation = Math.sqrt(user.investments.valid_user_investments.amount_pow_difference_summary(average)/number_valid_of_investments)
+    standard_desviation = Math.sqrt(Investment.valid_investments(user_id).amount_pow_difference_summary(average)/number_valid_of_investments)
     # Search cv_inverval for cv = standard_desviation/average
     cv_interval = CvInterval.get_intervals(standard_desviation/average).first
     # Search investment_interval for average. 1 for 1st collection of intervals
