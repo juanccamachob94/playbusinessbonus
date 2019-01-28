@@ -11,7 +11,7 @@ RSpec.describe ApplicationController, type: :controller do
       5 => [{lower_limit: 463.05,bonus: 30.0,upper_limit: 926.09},{lower_limit: 926.1,bonus: 35.0,upper_limit: 4630.49},{lower_limit: 4630.5,bonus: 40}]
     }
     expected_values.each do |val, expected|
-      it "Should to calculate a bonus for user" do
+      it "Should calculate bonus for user #{val}" do
         app = ApplicationController.new
         expect(app.bonus_calculation(val)).to match_array(expected)
       end
