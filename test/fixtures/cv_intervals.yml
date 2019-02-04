@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  min: 1.5
+  max: 1.5
+
+two:
+  min: 1.5
+  max: 1.5

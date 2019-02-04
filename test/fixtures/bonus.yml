@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  std: 1.5
+  percent: 1.5
+  cv_investment_interval: one
+
+two:
+  std: 1.5
+  percent: 1.5
+  cv_investment_interval: two
